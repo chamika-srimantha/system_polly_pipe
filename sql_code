@@ -13,10 +13,10 @@ insert into employee_form (emp_id,emp_name,emp_type,emp_contatcNo,emp_salary,emp
 end
 
 --To display all records
-create proc SP_Customer_View
+create proc SP_Employee_View
 as
 begin
-select * from customer_form
+select * from employee_form
 end 
 
 --update
