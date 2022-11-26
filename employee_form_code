@@ -35,8 +35,8 @@ namespace db_assignment
             SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Insert '" + int.Parse(txt_employeeID.Text) + "', '" + txt_employeeName.Text + "', '" + txt_employeeType.Text + "','" + txt_employeecontactNo.Text + "','" + txt_employeeSalary.Text + "','" + txt_employeeAddress.Text + "'", con);
             com.ExecuteNonQuery();
             con.Close();
-            MessageBox.Show("Successfully saved");
             LoadAllRecords();
+            MessageBox.Show("Successfully saved");
         }
 
         void LoadAllRecords()
@@ -61,8 +61,8 @@ namespace db_assignment
             SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Delete '" + int.Parse(txt_employeeID.Text) + "'", con);
             com.ExecuteNonQuery();
             con.Close();
-            MessageBox.Show("Successfully Deleted");
             LoadAllRecords();
+            MessageBox.Show("Successfully Deleted");
         }
 
         private void btn_update_Click(object sender, EventArgs e)
@@ -71,8 +71,8 @@ namespace db_assignment
             SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Update '" + int.Parse(txt_employeeID.Text) + "', '" + txt_employeeName.Text + "', '" + txt_employeeType.Text + "','" + txt_employeecontactNo.Text + "','" + txt_employeeSalary.Text + "','" + txt_employeeAddress.Text + "'", con);
             com.ExecuteNonQuery();
             con.Close();
-            MessageBox.Show("Successfully Updated");
             LoadAllRecords();
+            MessageBox.Show("Successfully Updated");
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
