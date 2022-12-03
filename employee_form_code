@@ -31,12 +31,26 @@ namespace db_assignment
         
         private void btn_insert_Click(object sender, EventArgs e)
         {
-            con.Open();
-            SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Insert '" + int.Parse(txt_employeeID.Text) + "', '" + txt_employeeName.Text + "', '" + txt_employeeType.Text + "','" + txt_employeecontactNo.Text + "','" + txt_employeeSalary.Text + "','" + txt_employeeAddress.Text + "'", con);
-            com.ExecuteNonQuery();
-            con.Close();
-            LoadAllRecords();
-            MessageBox.Show("Successfully saved");
+            if (txt_employeeID.Text == "" || txt_employeeName.Text == "" || txt_employeeType.Text == "" || txt_employeecontactNo.Text == "" || txt_employeeSalary.Text == "" || txt_employeeAddress.Text == "")
+            {
+                MessageBox.Show("Missing Information");
+            }
+            else
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Insert '" + int.Parse(txt_employeeID.Text) + "', '" + txt_employeeName.Text + "', '" + txt_employeeType.Text + "','" + txt_employeecontactNo.Text + "','" + txt_employeeSalary.Text + "','" + txt_employeeAddress.Text + "'", con);
+                    com.ExecuteNonQuery();
+                    con.Close();
+                    LoadAllRecords();
+                    MessageBox.Show("Successfully Inserted");
+                }
+                catch ( Exception Myex)
+                {
+                    MessageBox.Show(Myex.Message);
+                }
+            }
         }
 
         void LoadAllRecords()
@@ -57,28 +71,53 @@ namespace db_assignment
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            con.Open();
-            SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Delete '" + int.Parse(txt_employeeID.Text) + "'", con);
-            com.ExecuteNonQuery();
-            con.Close();
-            LoadAllRecords();
-            MessageBox.Show("Successfully Deleted");
+            if (txt_employeeID.Text == "")
+            {
+                MessageBox.Show("Missing Information");
+            }
+            else
+            {
+                try
+                {
+
+                    con.Open();
+                    SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Delete '" + int.Parse(txt_employeeID.Text) + "'", con);
+                    com.ExecuteNonQuery();
+                    con.Close();
+                    LoadAllRecords();
+                    MessageBox.Show("Successfully Deleted");
+                }
+                catch
+                {
+                    MessageBox.Show("");
+                }
+            }
         }
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            if (txt_employeeID.Text == "" || txt_employeeName.Text == "" || txt_employeeType.Text == "" || txt_employeecontactNo.Text == "" || txt_employeeSalary.Text == "" || txt_employeeAddress.Text == "")
+            {
+                MessageBox.Show("Missing Information");
+            }
+            else
+            {
+                try
+                {
             con.Open();
             SqlCommand com = new SqlCommand("exec dbo.SP_Employee_Update '" + int.Parse(txt_employeeID.Text) + "', '" + txt_employeeName.Text + "', '" + txt_employeeType.Text + "','" + txt_employeecontactNo.Text + "','" + txt_employeeSalary.Text + "','" + txt_employeeAddress.Text + "'", con);
             com.ExecuteNonQuery();
             con.Close();
             LoadAllRecords();
             MessageBox.Show("Successfully Updated");
+                }
+                catch
+                {
+                    MessageBox.Show("");
+                }
+            }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
@@ -96,9 +135,19 @@ namespace db_assignment
             }              
         }
 
-        private void txt_id_TextChanged(object sender, EventArgs e)
+        private void btn_exit_Click(object sender, EventArgs e)
         {
-            
+            Application.Exit();
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            txt_employeeID.Clear();
+            txt_employeeName.Clear();
+            txt_employeeType.Clear();
+            txt_employeecontactNo.Clear();
+            txt_employeeSalary.Clear();
+            txt_employeeAddress.Clear();
         }
     }
 }
